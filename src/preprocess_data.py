@@ -45,7 +45,7 @@ def chunk_docs(docs: List[Document], chunk_size: str = 500) -> List[Document]:
 
 
 def create_vector_db(
-    docs: List[Document], db_path: str, access_token_path: str
+    docs: List[Document], db_path: str, access_tokens_path: str
 ) -> None:
     """
     Create vectore store for the docs using Chroma and OpenAI.
@@ -54,7 +54,7 @@ def create_vector_db(
         - docs (List[Document]): List of chunked docs.
         - path (str): Path to save the store
     """
-    with open(access_token_path) as f:
+    with open(access_tokens_path) as f:
         openai_api_key = json.load(f)["openai"]["isemantics"]["hossam"]
     encoder = OpenAIEmbeddings(api_key=openai_api_key)
     vector_db = Chroma.from_documents(
@@ -74,7 +74,7 @@ def main(args, logger):
     logger.info("Chunking Docs")
     docs = chunk_docs(docs, args.chunk_size)
     logger.info("Creating Vector Data Base")
-    create_vector_db(docs, args.vector_db, args.access_token_path)
+    create_vector_db(docs, args.vector_db, args.access_tokens_path)
 
 
 if __name__ == "__main__":
@@ -84,5 +84,5 @@ if __name__ == "__main__":
         level=logging.INFO,
     )
     logger = logging.getLogger(__name__)
-    args = get_processing_parser()
+    args = get_processing_parser().parse_args()
     main(args, logger)
