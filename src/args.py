@@ -4,6 +4,7 @@ import argparse
 
 
 def get_processing_parser():
+    """Create argparser for data preprocessing."""
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--docs_dir",
