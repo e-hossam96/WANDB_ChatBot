@@ -1,14 +1,16 @@
 """Preprocessing dataset."""
 
-import logging
 import glob
 import json
+import logging
 from typing import List
 from langchain.docstore.document import Document
 from langchain.document_loaders import UnstructuredMarkdownLoader
 from langchain.text_splitter import MarkdownTextSplitter
-from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
+from langchain.vectorstores import Chroma
+
+from args import get_processing_parser
 
 
 def load_data(path: str) -> List[Document]:
@@ -64,6 +66,17 @@ def create_vector_db(
     return None
 
 
+def main(args, logger):
+    """Excute preprocessing pipeline."""
+    logger.info("Starting W&B_ChatBot Project")
+    logger.info("Loading Data")
+    docs = load_data(args.docs_dir)
+    logger.info("Chunking Docs")
+    docs = chunk_docs(docs, args.chunk_size)
+    logger.info("Creating Vector Data Base")
+    create_vector_db(docs, args.vector_db, args.access_token_path)
+
+
 if __name__ == "__main__":
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
@@ -71,10 +84,5 @@ if __name__ == "__main__":
         level=logging.INFO,
     )
     logger = logging.getLogger(__name__)
-    logger.info("Starting W&B_ChatBot Project")
-    logger.info("Loading Data")
-    docs = load_data("./data/docs_sample/")
-    logger.info("Chunking Docs")
-    docs = chunk_docs(docs)
-    logger.info("Creating Vector Data Base")
-    create_vector_db(docs, "./data/vector_db", "./data/access_tokens.json")
+    args = get_processing_parser()
+    main(args, logger)
