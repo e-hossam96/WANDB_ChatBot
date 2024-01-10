@@ -19,9 +19,9 @@ def get_processing_parser():
         help="The number of tokens to include in each document chunk",
     )
     parser.add_argument(
-        "--vector_store",
+        "--vector_db",
         type=str,
-        default="./data/vector_store/",
+        default="./data/vector_db/",
         help="The directory to save or load the Chroma db to/from",
     )
     parser.add_argument(
