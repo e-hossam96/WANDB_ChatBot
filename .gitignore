@@ -1,2 +1,3 @@
 data/access_tokens.json
 src/__pycache__
+wandb/
