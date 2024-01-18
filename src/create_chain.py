@@ -1,8 +1,6 @@
 """Defining the conversation chain."""
 
 import json
-import wandb
-import logging
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 from langchain.embeddings import OpenAIEmbeddings
@@ -15,7 +13,6 @@ from langchain.prompts import (
 )
 
 from typing import List
-from args import get_chat_parser
 
 
 def load_prompt_template(path: str, index=0) -> ChatPromptTemplate:
