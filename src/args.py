@@ -45,7 +45,7 @@ def get_chat_parser():
     parser.add_argument(
         "--prompt_temp_path",
         type=str,
-        default="./data/prompt_template.json",
+        default="./data/prompt_templates.json",
         help="The directory to prompt templates.",
     )
     return parser
