@@ -1,0 +1,5 @@
+outs:
+- md5: 0ccbc3b9b5dc48114d090f8b42bb554d
+  size: 3739
+  hash: md5
+  path: prompt_templates.json
