@@ -1,0 +1,16 @@
+wandb
+openai
+pandas
+unstructured
+langchain
+langchain-community
+langchain-openai
+gradio
+gradio_client
+tenacity
+tiktoken
+rich
+chromadb
+pdf2image
+tabulate
+markdown
